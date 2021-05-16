@@ -1,15 +1,17 @@
 <template>
-  <hello-world />
+  <div>
+    <main-nav />
+  </div>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld';
-
+import MainNav from '../components/Navigation/MainNav.vue';
 export default {
   name: 'Home',
 
   components: {
-    HelloWorld,
+    MainNav,
   },
 };
 </script>
+<style lang="sass" scoped></style>
