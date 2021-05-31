@@ -11,7 +11,7 @@ nav(:style="{height}")
     .expanded(v-if="display")
       .menu-btn(v-for="item in menuList" :key="item")
         v-btn(text color="white" :title="'Button for route ' + item " @click.prevent="handleMenuSelect(item)") {{ item }}
-      v-btn(icon color="white" title="Button for admin account login" @click.prevent="handleMenuSelect('AdminLogin')")
+      v-btn(icon class="admin-btn" color="white" title="Button for admin account login" @click.prevent="handleMenuSelect('AdminLogin')")
         v-icon mdi-account-lock
 </template>
 
@@ -40,10 +40,19 @@ export default {
   },
   watch: {
     display(value) {
-      if (value) {
-        this.height = `${this.menuList.length * 52}px`;
+      const windowWidth = window.innerWidth;
+      if (windowWidth < 760) {
+        if (value) {
+          this.height = `${this.menuList.length * 52}px`;
+        } else {
+          this.height = '60px';
+        }
       } else {
-        this.height = '60px';
+        if (value) {
+          this.height = `${this.menuList.length * 33}px`;
+        } else {
+          this.height = '60px';
+        }
       }
     },
   },
@@ -69,7 +78,108 @@ nav .expanded {
 nav h1 {
   padding-left: 1rem;
 }
-nav button {
-  margin-left: 1rem;
+
+@media screen and (min-width: 320px) and (max-width: 460px) {
+  nav button {
+    margin-left: 0.7rem;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 740px) {
+  nav button {
+    margin-left: 4em;
+  }
+}
+@media screen and (min-width: 800px) and (max-width: 820px) {
+  nav button {
+    margin-left: 8em;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 2000px) {
+  nav button {
+    margin-left: 8em;
+  }
+  nav {
+    .expanded {
+      margin-left: -5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 0.2fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      .admin-btn {
+        grid-row-start: 3;
+        grid-column-start: 2;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+  nav button {
+    margin-left: 12em;
+  }
+}
+
+@media screen and (min-width: 1366px) and (max-width: 1366px) {
+  nav button {
+    margin-left: 18em;
+  }
+  nav {
+    .expanded {
+      margin-left: -5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 0.2fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      .admin-btn {
+        grid-row-start: 3;
+        grid-column-start: 2;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1304px) and (max-width: 1200px) {
+  nav button {
+    margin-left: 15em;
+  }
+  nav {
+    .expanded {
+      margin-left: -5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 0.2fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      .admin-btn {
+        grid-row-start: 3;
+        grid-column-start: 2;
+      }
+    }
+  }
+}
+@media screen and (min-width: 1364px) and (max-width: 2000px) {
+  nav button {
+    margin-left: 10em;
+  }
+  nav {
+    .expanded {
+      margin-left: -5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 0.2fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+    }
+  }
+}
+@media screen and (min-width: 1700px) {
+  nav button {
+    margin-left: 28em;
+  }
+  nav {
+    .expanded {
+      margin-left: -5rem;
+      display: grid;
+      grid-template-columns: repeat(4, 0.2fr);
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+    }
+  }
 }
 </style>

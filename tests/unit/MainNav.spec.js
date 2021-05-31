@@ -125,5 +125,24 @@ describe('MainNav.vue', () => {
       await wrapper.vm.$nextTick();
       expect(wrapper.emitted().selection[0][0]).toBe('AdminLogin');
     });
+    it(`sets the height if window width is < 762`, async () => {
+      global.innerWidth = 700;
+      global.dispatchEvent(new Event('resize'));
+      const wrapper = exec();
+      await wrapper.setData({ display: true });
+      const calculation = wrapper.vm.$data.menuList.length * 52;
+      expect(wrapper.vm.$data.height).toBe(`${calculation}px`);
+    });
+    it(`sets the height if window width is < 762 and display turned off`, async () => {
+      global.innerWidth = 700;
+      global.dispatchEvent(new Event('resize'));
+      const wrapper = exec();
+      await wrapper.setData({ display: true });
+      const calculation = wrapper.vm.$data.menuList.length * 52;
+      expect(wrapper.vm.$data.height).toBe(`${calculation}px`);
+      await wrapper.setData({ display: false });
+      expect(wrapper.vm.$data.height).toBe(`60px`);
+
+    });
   });
 });
